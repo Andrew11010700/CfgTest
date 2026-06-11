@@ -8,6 +8,7 @@ import androidx.navigation.fragment.navArgs
 import com.cfg.testtask.R
 import com.cfg.testtask.base.BaseFragment
 import com.cfg.testtask.databinding.FragmentEditProductBinding
+import com.cfg.testtask.utils.KeyboardUtil
 import com.cfg.testtask.utils.extension.dataBinding
 import com.cfg.testtask.utils.extension.launchInViewLifecycleOwner
 import dagger.hilt.android.AndroidEntryPoint
@@ -29,10 +30,10 @@ class EditProductFragment: BaseFragment(R.layout.fragment_edit_product) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         observeProduct()
-        configure()
+        configure(savedInstanceState)
     }
 
-    private fun configure() {
+    private fun configure(savedInstanceState: Bundle?) {
         with(binding) {
             btnSaveProduct.setOnClickListener {
                 viewModel.onEditProduct()
@@ -44,6 +45,13 @@ class EditProductFragment: BaseFragment(R.layout.fragment_edit_product) {
             etProductDescription.addTextChangedListener {
                 btnSaveProduct.isEnabled = it.toString() != viewModel.initialFieldsState.description
                         || etProductName.text.toString() != viewModel.initialFieldsState.name
+            }
+
+            if (savedInstanceState == null) {
+                etProductName.post {
+                    etProductName.setSelection(etProductName.text?.length ?: 0)
+                    KeyboardUtil.showKeyboard(requireContext(), etProductName)
+                }
             }
         }
     }

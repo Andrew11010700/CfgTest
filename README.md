@@ -27,6 +27,9 @@ MVVM
 
 ## Project Structure
 
+- base
+  - dialog
+  - events
 - data
   - remote
   - local
@@ -36,6 +39,24 @@ MVVM
   - products
   - edit
 - di
+   - local
+   - remote
+   - repository
+   - utils
+- domain
+   - model
+   - repository
+- ui
+   - dialog
+   - edit
+   - list
+     - adapter
+       - vh
+   - load
+- utils
+   - delegate
+   - extension
+   - resource
 
 ## Features
 
@@ -55,3 +76,10 @@ https://fake-store-api.mock.beeceptor.com/api/products
 2. Open project in Android Studio
 3. Sync Gradle
 4. Run application
+
+## Notes
+
+The application uses Room as a single source of truth.
+Data is always requested from the API when the user presses the "Get Data" button, according to the task requirements.
+
+
