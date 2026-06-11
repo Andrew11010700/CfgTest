@@ -29,9 +29,13 @@ class EditProductFragment: BaseFragment(R.layout.fragment_edit_product) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         observeProduct()
+        configure()
+    }
+
+    private fun configure() {
         with(binding) {
             btnSaveProduct.setOnClickListener {
-                viewModel.onEditProduct(etProductName.text.toString(), etProductDescription.text.toString())
+                viewModel.onEditProduct()
             }
             etProductName.addTextChangedListener {
                 btnSaveProduct.isEnabled = it.toString() != viewModel.initialFieldsState.name
@@ -43,7 +47,6 @@ class EditProductFragment: BaseFragment(R.layout.fragment_edit_product) {
             }
         }
     }
-
 
     private fun observeProduct() {
         launchInViewLifecycleOwner {

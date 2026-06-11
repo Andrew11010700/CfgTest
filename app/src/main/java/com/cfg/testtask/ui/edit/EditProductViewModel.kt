@@ -31,11 +31,9 @@ class EditProductViewModel @Inject constructor(
         }
     }
 
-    fun onEditProduct(name: String, description: String) {
+    fun onEditProduct() {
         launchWithHandler(showLoading = false) {
             val product = productState.value
-            product?.name = name
-            product?.description = description
             product ?: return@launchWithHandler
             repository.saveProduct(product)
             showMessage(MessageEvent.Success(res.getString(R.string.updated_data)))
