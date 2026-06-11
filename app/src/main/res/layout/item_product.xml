@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="product"
+            type="com.cfg.testtask.domain.model.Product" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginVertical="8dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackground"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="2dp"
+        app:strokeColor="#14000000"
+        app:strokeWidth="1dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="132dp"
+            android:padding="12dp">
+
+            <TextView
+                android:id="@+id/tv_product_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@{product.name}"
+                android:textAppearance="?attr/textAppearanceTitleMedium"
+                android:textColor="?android:attr/textColorPrimary"
+                app:layout_constraintEnd_toStartOf="@id/tv_product_price"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Wireless Headphones" />
+
+            <TextView
+                android:id="@+id/tv_product_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                app:productPrice="@{product.price}"
+                android:textAppearance="?attr/textAppearanceTitleSmall"
+                android:textColor="?attr/colorPrimary"
+                app:layout_constraintBaseline_toBaselineOf="@id/tv_product_name"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:text="$149.99" />
+
+            <TextView
+                android:id="@+id/tv_product_meta"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="4dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                app:productMetaBrand="@{product.brand}"
+                app:productMetaCategory="@{product.category}"
+                android:textAppearance="?attr/textAppearanceBodySmall"
+                android:textColor="?android:attr/textColorSecondary"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_product_name"
+                tools:text="SoundMasters / Electronics" />
+
+            <TextView
+                android:id="@+id/tv_product_description"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="8dp"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:text="@{product.description}"
+                android:textAppearance="?attr/textAppearanceBodyMedium"
+                android:textColor="?android:attr/textColorPrimary"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_product_meta"
+                tools:text="Premium wireless headphones with noise-cancellation." />
+
+            <TextView
+                android:id="@+id/tv_product_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="10dp"
+                app:productRating="@{product.rating}"
+                android:textAppearance="?attr/textAppearanceLabelMedium"
+                android:textColor="?android:attr/textColorSecondary"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_product_description"
+                tools:text="Rating 4.8" />
+
+            <TextView
+                android:id="@+id/tv_product_discount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                app:productDiscount="@{product.discount}"
+                android:textAppearance="?attr/textAppearanceLabelMedium"
+                android:textColor="@color/accent_success"
+                app:layout_constraintBaseline_toBaselineOf="@id/tv_product_rating"
+                app:layout_constraintStart_toEndOf="@id/tv_product_rating"
+                tools:text="15% off" />
+
+            <TextView
+                android:id="@+id/tv_product_availability"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:productAvailability="@{product.availability}"
+                android:textAppearance="?attr/textAppearanceLabelMedium"
+                android:textColor="@color/accent_success"
+                app:layout_constraintBaseline_toBaselineOf="@id/tv_product_rating"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:text="Available" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>

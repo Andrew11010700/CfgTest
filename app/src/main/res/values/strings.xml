@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">CfgTest</string>
+    <string name="network_not_found">Перевірте інтернет з\'єднання та спробуйте пізніше</string>
+    <string name="server_error">Щось пішло не так, спробуйте пізніше</string>
+    <string name="internet_error">Перевірте інтернет з\'єднання та спробуйте пізніше</string>
+    <string name="updated_data">Дані оновлено</string>
+    <string name="get_data">Отримати дані</string>
+    <string name="product_name_hint">Name</string>
+    <string name="product_description_hint">Description</string>
+    <string name="save_data">Зберегти дані</string>
+    <string name="product_price_format">$%.2f</string>
+    <string name="product_meta_format">%1$s / %2$s</string>
+    <string name="product_rating_format">Rating %.1f</string>
+    <string name="product_discount_format">%d%% off</string>
+    <string name="product_available">Available</string>
+    <string name="product_unavailable">Unavailable</string>
+</resources>

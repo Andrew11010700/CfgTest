@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/common_nav"
+    app:startDestination="@id/loadProductsFragment">
+
+    <fragment
+        android:id="@+id/loadProductsFragment"
+        android:name="com.cfg.testtask.ui.load.LoadProductsFragment"
+        tools:layout="@layout/fragment_load_products"
+        android:label="LoadProductsFragment" >
+
+        <action
+            android:id="@+id/to_productListFragment"
+            app:destination="@id/productListFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/productListFragment"
+        android:name="com.cfg.testtask.ui.list.ProductListFragment"
+        tools:layout="@layout/fragment_products_list"
+        android:label="ProductListFragment">
+
+        <action
+            android:id="@+id/to_editProductFragment"
+            app:destination="@id/editProductFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/editProductFragment"
+        android:name="com.cfg.testtask.ui.edit.EditProductFragment"
+        tools:layout="@layout/fragment_edit_product"
+        android:label="EditProductFragment">
+
+        <argument
+            android:name="productId"
+            app:argType="long" />
+
+    </fragment>
+
+
+</navigation>
