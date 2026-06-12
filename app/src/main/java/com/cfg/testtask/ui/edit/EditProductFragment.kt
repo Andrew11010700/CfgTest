@@ -52,6 +52,9 @@ class EditProductFragment: BaseFragment(R.layout.fragment_edit_product) {
                     etProductName.setSelection(etProductName.text?.length ?: 0)
                     KeyboardUtil.showKeyboard(requireContext(), etProductName)
                 }
+                etProductDescription.post {
+                    etProductDescription.setSelection(etProductDescription.text?.length ?: 0)
+                }
             }
         }
     }
