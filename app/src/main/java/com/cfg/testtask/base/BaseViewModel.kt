@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.cfg.testtask.R
 import com.cfg.testtask.base.events.MessageEvent
 import com.cfg.testtask.base.events.NavAction
+import com.cfg.testtask.utils.flow.SingleFlowEvent
 import com.cfg.testtask.utils.resource.ResourceProvider
 import kotlinx.coroutines.CompletableJob
 import kotlinx.coroutines.CoroutineDispatcher
@@ -12,8 +13,6 @@ import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
@@ -23,14 +22,11 @@ import kotlin.coroutines.CoroutineContext
 
 abstract class BaseViewModel: ViewModel() {
 
-    protected val _isShowLoadingDialog = MutableSharedFlow<Boolean>()
-    val isShowLoadingDialog = _isShowLoadingDialog.asSharedFlow()
+    val isShowLoadingDialog = SingleFlowEvent<Boolean>(viewModelScope)
 
-    private val _navAction = MutableSharedFlow<NavAction>()
-    val navAction = _navAction.asSharedFlow()
+    val navAction = SingleFlowEvent<NavAction>(viewModelScope)
 
-    private val _message = MutableSharedFlow<MessageEvent>()
-    val message = _message.asSharedFlow()
+    val message = SingleFlowEvent<MessageEvent>(viewModelScope)
 
     @Inject
     lateinit var res: ResourceProvider
@@ -65,13 +61,11 @@ abstract class BaseViewModel: ViewModel() {
     }
 
     protected fun navigate(navAction: NavAction) {
-        launchWithHandler(showLoading = false) {
-            _navAction.emit(navAction)
-        }
+        this@BaseViewModel.navAction.emit(navAction)
     }
 
-    protected suspend fun showMessage(messageEvent: MessageEvent) {
-        _message.emit(messageEvent)
+    protected fun showMessage(messageEvent: MessageEvent) {
+        message.emit(messageEvent)
     }
 
     protected fun launchWithHandler(
@@ -81,13 +75,13 @@ abstract class BaseViewModel: ViewModel() {
         block: suspend CoroutineScope.() -> Unit
     ): Job {
         return viewModelScope.launch(handler) {
-            if (showLoading) _isShowLoadingDialog.emit(true)
+            if (showLoading) isShowLoadingDialog.emit(true)
             try {
                 withContext(dispatcher) {
                     block()
                 }
             } finally {
-                if (showLoading) _isShowLoadingDialog.emit(false)
+                if (showLoading) isShowLoadingDialog.emit(false)
             }
         }
     }
